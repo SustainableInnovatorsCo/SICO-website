@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sustainable Innovator Co.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="34" height="34">
+          <path d="M20 4 C 10 4 5 14 5 22 C 5 30 12 36 20 36 C 20 26 20 14 20 4 Z" fill="#A8C256"/>
+          <path d="M20 4 C 30 4 35 14 35 22 C 35 30 28 36 20 36 C 20 26 20 14 20 4 Z" fill="#D9C9A3"/>
+        </svg>
+      </span>
+      <span class="brand-name">Sustainable<br>Innovator&nbsp;Co.</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#vision">Vision</a>
+      <a href="#mission">Mission</a>
+      <a href="#packages">Packages</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="#contact" class="btn btn-primary header-cta">Make an enquiry</a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-visual" aria-hidden="true">
+        <div class="arch arch-lg">
+          <img src="images/caterpillar.jpg" alt="">
+        </div>
+        <div class="arch arch-sm">
+          <img src="images/strawberries.jpg" alt="">
+        </div>
+      </div>
+
+      <div class="hero-copy">
+        <p class="eyebrow">Placeholder</p>
+        <h1>Growing the next generation of sustainable innovators.</h1>
+        <p class="hero-lede">We partner with schools to turn sustainability from a subject on a page into something students actually build, test, and lead.</p>
+        <div class="hero-actions">
+          <a href="#packages" class="btn btn-primary">See our packages</a>
+          <a href="#contact" class="btn btn-ghost">Talk to us</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-fade" aria-hidden="true"></div>
+  </section>
+
+  <div class="divider-slot"></div>
+
+  <!-- ============ VISION / MISSION ============ -->
+  <section class="vm" id="vision">
+    <div class="wrap vm-grid">
+      <div class="vm-block">
+        <h2 class="vm-label">Vision</h2>
+        <p class="vm-text">Cultivate future innovative leaders.</p>
+      </div>
+      <div class="vm-rule" aria-hidden="true"></div>
+      <div class="vm-block" id="mission">
+        <h2 class="vm-label">Mission</h2>
+        <p class="vm-text">Empower students to innovate for sustainable initiatives.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-slot"></div>
+
+  <!-- ============ PACKAGES ============ -->
+  <section class="packages" id="packages">
+    <div class="wrap">
+      <p class="eyebrow center">What we offer</p>
+      <h2 class="section-title center">Choose from a range of education packages designed for schools. </h2>
+      <p class="section-sub center">Each package is fully customisable, so you can tailor the experience to suit your curriculum, timetable, and students.</p>
+
+      <div class="card-grid" id="packageGrid"></div>
+    </div>
+  </section>
+
+  <div class="divider-slot"></div>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <p class="eyebrow">Get in touch</p>
+        <h2 class="section-title">Let's build your sustainability programme.</h2>
+        <p class="section-sub">Send us an enquiry and we'll reply within two working days — or reach us directly.</p>
+
+        <ul class="contact-list">
+          <li>
+            <span class="contact-label">Email</span>
+            <a href="mailto:sustainableinnovatorsco@gmail.com">sustainableinnovatorsco@gmail.com</a>
+          </li>
+          <li>
+            <span class="contact-label">Phone</span>
+            <a href="tel:+10000000000">+1 (000) 000-0000</a>
+          </li>
+        </ul>
+        <p class="contact-note">Placeholder contact details — update these with your real email and phone number.</p>
+      </div>
+
+      <form class="enquiry-form" id="enquiryForm" novalidate>
+        <div class="field">
+          <label for="f-email">Your email <span aria-hidden="true">*</span></label>
+          <input type="email" id="f-email" name="email" placeholder="you@school.edu" required>
+          <span class="field-error" data-error="email"></span>
+        </div>
+
+        <div class="field">
+          <label for="f-phone">Phone number <span class="optional">(optional)</span></label>
+          <input type="tel" id="f-phone" name="phone" placeholder="+1 000 000 0000">
+        </div>
+
+        <div class="field">
+          <label for="f-subject">What's this regarding? <span aria-hidden="true">*</span></label>
+          <input type="text" id="f-subject" name="subject" placeholder="e.g. Booking the Innovation Lab package" required>
+          <span class="field-error" data-error="subject"></span>
+        </div>
+
+        <div class="field">
+          <label for="f-message">Your enquiry <span aria-hidden="true">*</span></label>
+          <textarea id="f-message" name="message" rows="5" placeholder="Tell us a bit about your school and what you're looking for..." required></textarea>
+          <span class="field-error" data-error="message"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit">
+          <span class="btn-text">Send enquiry</span>
+        </button>
+
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span class="brand-name small">Sustainable Innovator Co.</span>
+    <p class="footer-tagline">Cultivating future innovative leaders, one school at a time.</p>
+    <p class="footer-copy">&copy; <span id="year"></span> Sustainable Innovator Co. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ============ PACKAGE MODAL ============ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <div class="modal-image">
+      <img id="modalImage" src="" alt="">
+    </div>
+    <div class="modal-body">
+      <p class="eyebrow" id="modalCost"></p>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <a href="#contact" class="btn btn-primary" id="modalCta">Enquire about this package</a>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
