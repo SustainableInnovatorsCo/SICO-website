@@ -239,69 +239,31 @@ if (form && statusEl) {
         }
       });
 
-      console.log(
-        'Formspree response:',
-        response.status
-      );
+      const data = await response.json();
 
       if (response.ok) {
         statusEl.textContent =
           "Thanks — your enquiry has been sent. We'll be in touch within two working days.";
 
-        statusEl.className =
-          'form-status success';
-
+        statusEl.className = 'form-status success';
         form.reset();
-
-        /* Clear previous error styling */
-        setFieldError('email', '');
-        setFieldError('subject', '');
-        setFieldError('message', '');
-
       } else {
-        let errorMessage =
+        console.error('Formspree error:', data);
+
+        statusEl.textContent =
           'Something went wrong. Please try again.';
 
-        try {
-          const data = await response.json();
-
-          console.error(
-            'Formspree error response:',
-            data
-          );
-
-          if (
-            data.errors &&
-            data.errors.length > 0
-          ) {
-            errorMessage =
-              data.errors
-                .map(error => error.message)
-                .join(' ');
-          }
-
-        } catch (parseError) {
-          console.error(
-            'Could not parse Formspree response:',
-            parseError
-          );
-        }
-        statusEl.textContent = errorMessage;
-        statusEl.className =
-          'form-status error';
+        statusEl.className = 'form-status error';
       }
 
     } catch (error) {
-      console.error(
-        'Form submission error:',
-        error
-      );
+      console.error('Fetch error:', error);
 
       statusEl.textContent =
         'Unable to send your enquiry. Please try again.';
 
-      statusEl.className =
-        'form-status error';
+      statusEl.className = 'form-status error';
+
 
     } finally {
       if (submitButton) {
