@@ -100,6 +100,16 @@ function closeModal() {
   if (lastFocused) lastFocused.focus();
 }
 
+modalCta.addEventListener('click', () => {
+  closeModal();
+});
+
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  if (lastFocused) lastFocused.focus();
+}
+
 modalClose.addEventListener('click', closeModal);
 overlay.addEventListener('click', (e) => {
   if (e.target === overlay) closeModal();
