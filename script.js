@@ -121,64 +121,157 @@ document.addEventListener('keydown', (e) => {
 /* ---------------- Enquiry form ---------------- */
 const form = document.getElementById('enquiryForm');
 const statusEl = document.getElementById('formStatus');
+if (form && statusEl) {
+  function setFieldError(name, message) {
+    const input = form.querySelector(`[name="${name}"]`);
+    const errorEl = form.querySelector(`[data-error="${name}"]`);
 
-function setFieldError(name, message) {
-  const field = form.querySelector(`[name="${name}"]`).closest('.field');
-  const errorEl = form.querySelector(`[data-error="${name}"]`);
-  if (message) {
-    field.classList.add('invalid');
-    errorEl.textContent = message;
-  } else {
-    field.classList.remove('invalid');
-    errorEl.textContent = '';
-  }
-}
+    if (!input) return;
 
-function isValidEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
+    const field = input.closest('.field');
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
+    if (message) {
+      if (field) {
+        field.classList.add('invalid');
+      }
 
-  const email = form.email.value.trim();
-  const subject = form.subject.value.trim();
-  const message = form.message.value.trim();
+      if (errorEl) {
+        errorEl.textContent = message;
+      }
+    } else {
+      if (field) {
+        field.classList.remove('invalid');
+      }
 
-  let valid = true;
-
-  if (!email) { setFieldError('email', 'Please add your email address.'); valid = false; }
-  else if (!isValidEmail(email)) { setFieldError('email', 'That email address doesn\'t look right.'); valid = false; }
-  else { setFieldError('email', ''); }
-
-  if (!subject) { setFieldError('subject', 'Let us know what this is regarding.'); valid = false; }
-  else { setFieldError('subject', ''); }
-
-  if (!message) { setFieldError('message', 'Add a few details for us to go on.'); valid = false; }
-  else { setFieldError('message', ''); }
-
-  if (!valid) {
-    statusEl.textContent = 'Please fix the highlighted fields.';
-    statusEl.className = 'form-status error';
-    return;
+      if (errorEl) {
+        errorEl.textContent = '';
+      }
+    }
   }
 
-  // ------------------------------------------------------------
-  // NOTE FOR DEVELOPER: there is no backend wired up yet.
-  // To actually receive these enquiries, replace this block with
-  // a fetch() call to your form endpoint / email service, e.g.:
-  //
-  // fetch('https://your-endpoint.example.com/enquiries', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ email, phone: form.phone.value, subject, message })
-  // });
-  // ------------------------------------------------------------
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
 
-  statusEl.textContent = 'Thanks — your enquiry has been sent. We\'ll be in touch within two working days.';
-  statusEl.className = 'form-status success';
-  form.reset();
-});
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    console.log('Form submitted');
+
+    const email = form.querySelector('[name="email"]').value.trim();
+    const subject = form.querySelector('[name="subject"]').value.trim();
+    const message = form.querySelector('[name="message"]').value.trim();
+
+    let valid = true;
+
+    /* Email validation */
+    if (!email) {
+      setFieldError(
+        'email',
+        'Please add your email address.'
+      );
+
+      valid = false;
+    } else if (!isValidEmail(email)) {
+      setFieldError(
+        'email',
+        "That email address doesn't look right."
+      );
+
+      valid = false;
+    } else {
+      setFieldError('email', '');
+    }
+
+    /* Subject validation */
+    if (!subject) {
+      setFieldError(
+        'subject',
+        'Let us know what this is regarding.'
+      );
+
+      valid = false;
+    } else {
+      setFieldError('subject', '');
+    }
+
+    /* Message validation */
+    if (!message) {
+      setFieldError(
+        'message',
+        'Add a few details for us to go on.'
+      );
+
+      valid = false;
+    } else {
+      setFieldError('message', '');
+    }
+
+    /* Stop if validation fails */
+    if (!valid) {
+      statusEl.textContent =
+        'Please fix the highlighted fields.';
+
+      statusEl.className =
+        'form-status error';
+
+      return;
+    }
+
+    /* Sending state */
+    statusEl.textContent = 'Sending...';
+    statusEl.className = 'form-status';
+
+    const submitButton = form.querySelector(
+      'button[type="submit"]'
+    );
+
+    if (submitButton) {
+      submitButton.disabled = true;
+    }
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          Accept: 'application/json'
+        }
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        statusEl.textContent =
+          "Thanks — your enquiry has been sent. We'll be in touch within two working days.";
+
+        statusEl.className = 'form-status success';
+        form.reset();
+      } else {
+        console.error('Formspree error:', data);
+
+        statusEl.textContent =
+          'Something went wrong. Please try again.';
+
+        statusEl.className = 'form-status error';
+      }
+
+    } catch (error) {
+      console.error('Fetch error:', error);
+
+      statusEl.textContent =
+        'Unable to send your enquiry. Please try again.';
+
+      statusEl.className = 'form-status error';
+
+
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+      }
+    }
+  });
+}
 
 /* ---------------- Scroll reveal ---------------- */
 const revealTargets = document.querySelectorAll('.vm-block, .package-card, .contact-info, .enquiry-form');
