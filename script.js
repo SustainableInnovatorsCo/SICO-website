@@ -44,7 +44,7 @@ const PACKAGES = [
   {
     title: 'Urban Grower',
     cost: '$60 per student',
-    image: 'images/4-week-challenge.png',
+    image: 'images/4-week-challenge.jpg',
     summary: 'A four-week program where students explore sustainable food production through aquaponics, hydroponics, and vertical farming while designing and building their own growing system.',
     details: 'Four-week program (one session per week) where students explore sustainable food production through aquaponics, hydroponics, and vertical farming systems. Participants learn the principles of circular economy, sustainable agriculture, and resource efficiency while designing and building their own growing system. The program demonstrates how fresh produce can be grown using minimal land and water resources, providing practical solutions for future food security challenges.',
   }
